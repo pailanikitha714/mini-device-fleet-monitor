@@ -180,7 +180,7 @@ Error responses are JSON, e.g. `{ "error": "Device 'x' not found" }`.
 
 ## AI Usage
 
-- **Tools used:** Claude (Anthropic).
-- **What for:** generating the initial project structure, Express routes, the in-memory store, the simulator, the Jest/Supertest tests, and a first draft of this README.
-- **Changed / rejected:** I did not base ONLINE/OFFLINE on the `timestamp` field sent by the device, because a device with a wrong clock would be reported incorrectly. The status uses the server's receive time instead, and the device timestamp is stored separately as `reported_timestamp`. I also avoided tests that `sleep` for 30 real seconds. Instead, the store takes an injectable clock, so the timeout is tested instantly and deterministically.
-- **Personally verified:** I ran `npm test` and confirmed all tests pass. I ran the server and the simulator, stopped `device-03`, and saw it change to OFFLINE in `/devices` and `/summary` about 30 seconds after its last heartbeat. I then restarted it and saw it return to ONLINE.
+- **Tool used:** Claude (Anthropic)
+- **How it was used:** I used Claude as a development assistant to help with the initial project structure, API implementation, simulator, automated tests, and README drafting.
+- **My involvement:** I reviewed the generated implementation, ran and verified the application locally, tested the API endpoints, checked the simulator behaviour, and made/validated design decisions such as using server-side heartbeat receipt time for ONLINE/OFFLINE status.
+- **Testing performed:** I ran `npm test` and confirmed all 38 tests pass. I also manually ran the server and simulator, stopped `device-03`, verified that it changed to OFFLINE after the timeout, and verified that it returned to ONLINE after restarting it.
